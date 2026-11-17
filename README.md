@@ -74,4 +74,4 @@ At a higher level, you can create variants by combining multiple pieces of data 
 
 ## AI Assistance
 
-AI was used extensively to adapt this backport's code for Minecraft 1.20.1. The changes have passed Java 17 compilation and an isolated client startup through initial resource loading; resource-pack behavior and gameplay still need broader testing.
+AI assistance was used extensively to adapt and debug the backport for Minecraft 1.20.1, and to create the project icon and listing text. The Java 17 build passed; an isolated client reached the initial resource reload and remained running for at least 10 seconds. Loading and matching a real Variants-CIT resource pack and in-game behavior remain unverified.
