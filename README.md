@@ -1,0 +1,77 @@
+# Variants-CIT
+
+## Unofficial Fabric backport for Minecraft 1.20.1
+
+This release is a modified backport of [Variants-CIT by Estecka](https://github.com/Estecka/mc-Variants-CIT), adapted for Fabric and Minecraft 1.20.1 by JustHari01. The upstream project targets newer Minecraft versions; this port adapts the model-loading APIs and maps modern item data components to 1.20.1 item NBT. Modified on 2026-11-18.
+
+This derivative is distributed under the same EUPL-1.2 terms as the upstream source. The complete license is included in `LICENSE`. Source for this backport: https://github.com/JustHari01/Variants-CIT-1.20.1-Fabric-Port
+
+The port has been build-checked and launched in an isolated Minecraft 1.20.1 client through initial resource loading. Resource-pack behavior and gameplay have not yet been checked.
+
+---
+A streamlined CIT format for items with standardized variants.
+
+This mod isn't as flexible as optifine, but excels in scenarios where one item has many variants based on the same piece of data. It yields better performances when extreme amounts of CITs are available, and uses a resource format that is less redundant, requiring only a short file to configure all possible variants at once.
+
+## Resource Pack Format
+This is an overview, please see the [wiki](https://github.com/Estecka/mc-Variants-CIT/wiki) for a complete guide.
+
+The format revolves around item variants being automatically associated to models or textures with matching names.
+Instead of defining a condition for every CIT, you define a single rule that governs all CITs in a collection, (so-called **modules**). This modules defines what item is affected, how to figure out its variants, and where their models are located.
+
+For example, here's a simple module that would change the texture of enchanted books :
+```json
+{
+	"type": "stored_enchantment",
+	"items": "minecraft:enchanted_book",
+	"modelPrefix": "item/book_cit/",
+	"modelParent": "item/generated",
+	"parameters": {
+		"levelSeparator": "_lvl_"
+	}
+}
+```
+
+Here, a book with the enchantment `minecraft:unbreaking` at level 2 will have the variant ID `minecraft:unbreaking_lvl_2`, and thus use the texture stored at `/assets/minecraft/texture/item/book_cit/unbreaking_lvl_2.png`. 
+This single module will work for every possible enchantment, vanilla or modded, so long as a corresponding texture exists.
+
+The module type above has a purpose-made logic for enchanted books. If no module type exists for a specific component, you can still use more generic modules to get a variant from any component:
+
+```json
+{
+	"type": "component_data",
+	"items": "minecraft:suspicious_stew",
+	"modelPrefix": "item/suspicious_stew_cit/",
+	"parameters": {
+		"componentType": "suspicious_stew_effects",
+		"nbtPath": "[0].id"
+	}
+}
+```
+
+At a higher level, you can create variants by combining multiple pieces of data from multiple components:
+```json
+{
+	"type": "component_format",
+	"items": "minecraft:diamond_sword",
+	"modelPrefix": "item/trimmed_diamond_sword/",
+	"parameters":{
+		"format": "${pattern}_${material}",
+		"variables": {
+			"pattern": {
+				"componentType": "trim",
+				"nbtPath": ".pattern"
+			},
+			"material": {
+				"componentType": "trim",
+				"nbtPath": ".material",
+				"transform": "discard_namespace"
+			}
+		}
+	}
+}
+```
+
+## AI Assistance
+
+AI was used extensively to adapt this backport's code for Minecraft 1.20.1. The changes have passed Java 17 compilation and an isolated client startup through initial resource loading; resource-pack behavior and gameplay still need broader testing.

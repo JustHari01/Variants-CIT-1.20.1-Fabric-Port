@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "variants-cit",
+	"version": "${version}",
+	"name": "Variants CIT (Unofficial 1.20.1 Port)",
+	"description": "Unofficial Fabric backport of Variants CIT for Minecraft 1.20.1.",
+	"authors": [
+		"Estecka",
+		"JustHari01"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/variants-cit",
+		"sources": "https://github.com/JustHari01/Variants-CIT-1.20.1-Fabric-Port",
+		"issues":  "https://github.com/JustHari01/Variants-CIT-1.20.1-Fabric-Port/issues"
+	},
+	"license": "EUPL-1.2",
+	"icon": "assets/variants-cit/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"fr.estecka.variantscit.VariantsCitMod"
+		]
+	},
+	"mixins": [
+		{ "environment": "client", "config": "variants-cit.mixins.json" }
+	],
+	"depends": {
+		"minecraft": "1.20.1",
+		"fabricloader": ">=0.14.21",
+		"fabric-api": ">=0.92.0",
+		"java": ">=17"
+	}
+}
