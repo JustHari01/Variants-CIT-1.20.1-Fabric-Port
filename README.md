@@ -6,7 +6,7 @@ This release is a modified backport of [Variants-CIT by Estecka](https://github.
 
 This derivative is distributed under the same EUPL-1.2 terms as the upstream source. The complete license is included in `LICENSE`. Source for this backport: https://github.com/JustHari01/Variants-CIT-1.20.1-Fabric-Port
 
-The port has been build-checked and launched in an isolated Minecraft 1.20.1 client through initial resource loading. Resource-pack behavior and gameplay have not yet been checked.
+The Java 17 build passes. An isolated Minecraft 1.20.1 client loaded a synthetic probe pack with one enchanted-book texture variant: the module and generated model were detected, and the previous missing-model warning did not recur. The run reached resource reload; rendered item matching, clean client shutdown, and compatibility with third-party packs remain unverified.
 
 ---
 A streamlined CIT format for items with standardized variants.
@@ -32,7 +32,7 @@ For example, here's a simple module that would change the texture of enchanted b
 }
 ```
 
-Here, a book with the enchantment `minecraft:unbreaking` at level 2 will have the variant ID `minecraft:unbreaking_lvl_2`, and thus use the texture stored at `/assets/minecraft/texture/item/book_cit/unbreaking_lvl_2.png`. 
+Here, a book with the enchantment `minecraft:unbreaking` at level 2 will have the variant ID `minecraft:unbreaking_lvl_2`, and thus use the texture stored at `/assets/minecraft/textures/item/book_cit/unbreaking_lvl_2.png`. 
 This single module will work for every possible enchantment, vanilla or modded, so long as a corresponding texture exists.
 
 The module type above has a purpose-made logic for enchanted books. If no module type exists for a specific component, you can still use more generic modules to get a variant from any component:
@@ -74,4 +74,5 @@ At a higher level, you can create variants by combining multiple pieces of data 
 
 ## AI Assistance
 
-AI assistance was used extensively to adapt and debug the backport for Minecraft 1.20.1, and to create the project icon and listing text. The Java 17 build passed; an isolated client reached the initial resource reload and remained running for at least 10 seconds. Loading and matching a real Variants-CIT resource pack and in-game behavior remain unverified.
+AI assistance was used to adapt and debug the backport for Minecraft 1.20.1 and to prepare the project icon and listing text.
+
