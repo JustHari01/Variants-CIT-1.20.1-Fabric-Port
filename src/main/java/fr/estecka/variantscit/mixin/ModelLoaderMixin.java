@@ -37,6 +37,8 @@ public class ModelLoaderMixin
 		Identifier textureId = new Identifier(modelId.getNamespace(), modelId.getPath());
 		JsonUnbakedModel model = JsonUnbakedModel.deserialize(ARBITRARY_MODEL.formatted(parent.toString(), textureId.toString()));
 		this.unbakedModels.put(textureId, model);
+		// ModelIdentifier equality includes its variant; seed the exact lookup key as well.
+		this.unbakedModels.put(modelId, model);
 		this.modelsToBake.put(modelId, model);
 	}
 
@@ -53,3 +55,4 @@ public class ModelLoaderMixin
 			this.AddFromTexture(entry.getKey(), entry.getValue());
 	}
 }
+
